@@ -1,0 +1,15 @@
+  (note: P=4 > 2 cores -> using --oversubscribe; ranks share cores)
+[B1] ring_allreduce correctness vs MPI_Allreduce, P = 4
+           n  n % P    max|ring - MPI_Allreduce|   result
+           1      1                    4.441e-16     PASS
+           3      3                    4.441e-16     PASS
+           7      3                    4.441e-16     PASS
+        1000      0                    1.776e-15     PASS
+        1001      1                    1.776e-15     PASS
+        1003      3                    1.776e-15     PASS
+        4099      3                    8.882e-16     PASS
+      100003      3                    1.776e-15     PASS
+     1048577      1                    1.776e-15     PASS
+  ALL PASS
+  Note: the difference is ~1e-16..1e-15, not exactly 0, because floating-point
+  addition is not associative and the library may sum in a different order.

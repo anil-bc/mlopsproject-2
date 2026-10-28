@@ -1,0 +1,15 @@
+[B2] Ring vs MPI_Allreduce, P = 2 ranks (times = max across ranks)
+   n (doubles)        bytes  iters    ring (us)  MPI_Allreduce (us)  ring/MPI
+           2^4          128   2000        11.79                2.36      5.00
+           2^8         2048   2000        12.42                4.35      2.86
+          2^12        32768   1024        29.92               17.84      1.68
+          2^16       524288     64       156.03              144.37      1.08
+          2^20      8388608      4      2258.19             3423.62      0.66
+          2^24    134217728      3     50898.53           104992.89      0.48
+
+  alpha-beta model:  T_ring(n) = 2(P-1)*alpha + 2(P-1)/P * (8n bytes) * beta
+  alpha (from n=2^4)      =    5.893 us
+  beta  (from n=2^24)     =  379.136 ps/byte -> effective bandwidth 1/beta = 2.64 GB/s
+  cross-over n* = P*alpha/(8*beta) = 3,886 doubles (~30.4 KiB): below it latency dominates, above it bandwidth
+  least-squares fit (all sizes): alpha = 6.174 us, 1/beta = 3.30 GB/s
+  saved alpha/beta to /home/claude/mlopsproject-2/results/partB_alpha_beta_P2.json (Part D reads this file)

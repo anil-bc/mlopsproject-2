@@ -1,0 +1,15 @@
+============================================================
+ omp_kernels  |  omp_get_max_threads() = 2  |  omp_get_num_procs() = 2
+ compiler     : 13.3.0
+ build flags  : gcc -O2 -fopenmp
+============================================================
+
+[A3] Thread scaling -- reduction dot product, N = 16777216 (2^24)
+   threads       time (s)    speedup   efficiency         GB/s
+         1       0.027056       1.00         1.00         9.92
+         2       0.016128       1.68         0.84        16.64
+
+[A3] Thread scaling -- tiled GEMM, N = 1024, T = 64, order = ikj
+   threads       time (s)    speedup   efficiency      GFLOP/s
+         1         1.8194       1.00         1.00         1.18
+         2         0.6216       2.93         1.46         3.45

@@ -1,0 +1,14 @@
+============================================================
+ omp_kernels  |  omp_get_max_threads() = 2  |  omp_get_num_procs() = 2
+ compiler     : 13.3.0
+ build flags  : gcc -O2 -fopenmp
+============================================================
+
+[A2] GEMM C = A*B, N = 1024, tile T = 32, in-tile order = ikj, threads = 2
+     timing: 1 warm-up + mean of 3 timed calls; GFLOP/s = 2N^3 / t
+     tile working set ~ 3*T^2*8 bytes = 24.0 KiB
+
+  version                    time (s)      GFLOP/s   max|diff| vs 1    check
+  1. naive serial              8.5012         0.25                -      ref
+  2. naive + OpenMP            2.5227         0.85        0.000e+00     PASS
+  3. tiled + OpenMP            0.4845         4.43        0.000e+00     PASS

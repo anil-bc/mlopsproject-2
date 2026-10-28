@@ -1,0 +1,6 @@
+Model: Llama 3 8B (P=8.00e+09, T=1.50e+13)
+Total training FLOPs (6*P*T): 7.200e+23 FLOPs
+Optimizer memory (16*P): 128.00 GB
+A100 peak=312 TFLOP/s, utilization=40%
+Time on 1 GPU: 5.769e+09 s (~66,773.5 days)
+Time on 1024 GPUs: 5.634e+06 s (~65.21 days)

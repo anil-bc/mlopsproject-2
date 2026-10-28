@@ -1,0 +1,19 @@
+Model: Llama 3 8B (P=8.0e+09), T=1.5e+13 tokens, G=4e+06 tokens/step -> 3,750,000 steps
+GPU: A100 312 TFLOP/s BF16 x 40% MFU
+
+Published interconnect (200 Gb/s HDR InfiniBand per GPU):  alpha = 2.00 us, 1/beta = 25.00 GB/s, gradient = 16 GB per step
+   N GPUs  T_compute (s)  T_comm (s)  E no-overlap  E overlap
+        8        192.308       1.120         99.4%     100.0%
+       64         24.038       1.260         95.0%     100.0%
+     1024          1.502       1.283         53.9%     100.0%
+
+Our measured Part B numbers (P=4 ranks, one machine):  alpha = 14.18 us, 1/beta = 1.55 GB/s, gradient = 16 GB per step
+   N GPUs  T_compute (s)  T_comm (s)  E no-overlap  E overlap
+        8        192.308      18.050         91.4%     100.0%
+       64         24.038      20.307         54.2%     100.0%
+     1024          1.502      20.637          6.8%       7.3%
+
+Time to train on 1,024 GPUs
+  Assignment 1 (perfect linear scaling) :  65.21 days
+  Assignment 2 (no-overlap E = 53.9%)  : 120.89 days  (+85%)
+  with perfect overlap (E = 100.0%)      :  65.21 days

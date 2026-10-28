@@ -1,0 +1,17 @@
+  (note: P=4 > 2 cores -> using --oversubscribe; ranks share cores)
+[dp P=4] epoch    0  train_loss=0.697998
+[dp P=4] epoch   40  train_loss=0.152071
+[dp P=4] epoch   80  train_loss=0.144526
+[dp P=4] epoch  120  train_loss=0.146176
+[dp P=4] epoch  160  train_loss=0.144709
+[dp P=4] epoch  199  train_loss=0.159217
+
+====================================================================
+ Data-parallel MLP: P = 4, global batch G = 32, per-rank batch = 8
+ epochs = 200, lr = 0.5, hidden = 16, all-reduce = comm.Allreduce
+====================================================================
+ Claim (i)  replicas identical : max |W1_rank - W1_rank0|      = 0.000e+00
+ Claim (ii) DP == full batch   : max |loss_DP - loss_single|   = 3.608e-16  (per-epoch curve)
+                                 max |W1_DP - W1_single| (end) = 4.441e-15
+ final validation accuracy = 0.988   training wall time = 1.18 s
+ RESULT: both claims hold (differences are at floating-point round-off level)

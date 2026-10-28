@@ -1,0 +1,44 @@
+# Builds and runs every part of Assignment 2 on a GitHub-hosted Ubuntu runner on
+# every push, and uploads all outputs as a downloadable "results" artifact.
+# This proves the project is executable from a clean machine.
+name: assignment-2
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  run-all:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install compiler, OpenMP and Open MPI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential openmpi-bin libopenmpi-dev
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check toolchain
+        run: bash setup/check_env.sh
+
+      - name: Run Parts A-D
+        run: |
+          chmod +x run_all.sh part_a_openmp/scaling.sh
+          ./run_all.sh
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: results
+          path: results/

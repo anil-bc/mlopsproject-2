@@ -1,0 +1,14 @@
+============================================================
+ omp_kernels  |  omp_get_max_threads() = 2  |  omp_get_num_procs() = 2
+ compiler     : 13.3.0
+ build flags  : gcc -O2 -fopenmp
+============================================================
+
+[A1] Dot product, N = 16777216 (2^24), threads = 2
+     a[i]=1.0, b[i]=0.5  ->  exact answer = N/2
+
+  variant                    result           expected      abs error     time (s)
+  1. racy                 4462889.0          8388608.0      3925719.0     0.028518
+  2. critical             8388608.0          8388608.0            0.0     1.192248
+  3. atomic               8388608.0          8388608.0            0.0     0.613893
+  4. reduction            8388608.0          8388608.0            0.0     0.015077

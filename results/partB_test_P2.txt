@@ -1,0 +1,13 @@
+[B1] ring_allreduce correctness vs MPI_Allreduce, P = 2
+           n  n % P    max|ring - MPI_Allreduce|   result
+           1      1                    0.000e+00     PASS
+           7      1                    0.000e+00     PASS
+        1000      0                    0.000e+00     PASS
+        1001      1                    0.000e+00     PASS
+        1003      1                    0.000e+00     PASS
+        4099      1                    0.000e+00     PASS
+      100003      1                    0.000e+00     PASS
+     1048577      1                    0.000e+00     PASS
+  ALL PASS
+  Note: the difference is ~1e-16..1e-15, not exactly 0, because floating-point
+  addition is not associative and the library may sum in a different order.
